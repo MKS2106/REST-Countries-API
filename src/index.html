@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width='device-width', initial-scale=1.0" />
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>What's in the World</h1>
+    <section>
+      <!-- <label for="country-search">Search the country</label> -->
+      <input type="search" id="country-search" name="country-search" />
+      <button type="submit" id = "btn">Search</button>
+    </section>
+    <div id="region-container">
+        <!-- <label for="drop-down" >Filter by Region</label> -->
+        <select name="region" id="region-filter">
+        <option value="select">Select Region</option>
+        <option value ="All Regions">All-Regions</option>    
+        <option value ="Africa">Africa</option>
+        <option value ="Americas">Americas</option>
+        <option value ="Asia">Asia</option>
+        <option value ="Oceania">Oceania</option>
+        <option value ="Europe">Europe</option>
+        </select>
+
+        </div>
+    <div id="country-container">
+         <div id="country"></div>
+    </div>
+   
+  </body>
+</html>

@@ -1,9 +1,13 @@
+// const { constant } = require("lodash");
+
 const container = document.getElementById("country");
 const searchInput = document.getElementById("country-search");
-const searchButton = document.getElementById("btn");
-const selectedRegion = document.getElementById("region-filter")
+
+const selectedRegion = document.getElementById("region-filter");
 container.innerHTML = "";
 
+let allCountries = []; // array to hold all the countires from API response
+//Function to fetch data from API
 async function fetchCountries() {
   try {
     const res = await fetch("https://restcountries.com/v3.1/all");
@@ -11,24 +15,28 @@ async function fetchCountries() {
     if (!res.ok) {
       throw new Error(`API request failed with status ${res.status}`);
     }
-    const countries = await res.json();
+    allCountries = await res.json();
     // console.log(countries);
-    displayCountries(countries);
+    displayCountries(allCountries);
   } catch (error) {
     console.error("Failed", error);
   }
 }
 
+//Function to display countries
 function displayCountries(countries) {
-  console.log("Inside Display Countries");
-    container.innerHTML = "";
+  container.innerHTML = "";
   countries.forEach((country) => {
     const countryDiv = document.createElement("div");
-    // countryDiv.innerHTML = "display data"
-    countryDiv.innerHTML = `<img style = "width:200px" src="${country.flags.svg}"/>
-      <h3>${country.name.common}</h3>
-      <p><strong>Capital:</strong> ${country.capital}</p>
-      <p><strong>Population:</strong> ${country.population}</p>
+    countryDiv.classList.add("country-item");
+    countryDiv.innerHTML = `<img style = "width:200px" src="${
+      country.flags.svg
+    }"/>
+      <h3>${country.name.common || "Unknown Country"}</h3>
+      <p><strong>Capital:</strong> ${country.capital?.[0] || "N/A"}</p>
+      <p><strong>Population:</strong> ${
+        country.population?.toLocaleString() || "N/A"
+      }</p>
 
       <hr>
     `;
@@ -36,62 +44,48 @@ function displayCountries(countries) {
   });
 }
 
-searchButton.addEventListener("click", function () {
-  console.log("upon clicking search button");
-  let countrySearched = searchInput.value;
-  if(countrySearched){
-  searchTheCountry(countrySearched);
-  }else{
-    container.innerHTML = "<p>Please enter a country.</p>"
-  }
+searchInput.addEventListener("input", () => {
+  searchByCountry();
 });
 
-selectedRegion.addEventListener("change", function(){
-  console.log("Selected a region")
-  if(selectedRegion.value === "select"){
-    container.innerHTML = "<p>Please select a region.</p>"
-  }
-  if(selectedRegion.value === "All Regions"){
+selectedRegion.addEventListener("change", function () {
+  if (selectedRegion.value === "All Regions") {
     fetchCountries();
-  }else
-  filterByRegion(selectedRegion.value)
-})
+  } else filterByRegion(selectedRegion.value);
+});
 
-async function searchTheCountry(country) {
-  console.log("Inside Search function");
-  try {
-    const response = await fetch(
-      `https://restcountries.com/v3.1/name/${country}?fullText=true`
-    );
-    if (!response.ok) {
-      throw new Error("No such Country Found");
-    }
-    const data = await response.json();
-    displayCountries(data);
-      searchInput.value = "";
-      } catch (error) {
-    console.error("Search error:", error);
-    container.innerHTML = `<p style="color:red;">${error.message}</p>`;
+async function searchByCountry() {
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  if (!searchTerm) {
+    selectedRegion.value = "All Regions";
+    displayCountries(allCountries);
+    return;
   }
+
+  // Reset region to all regions
+  selectedRegion.value = "All Regions";
+
+  // Filter allCountries by search term
+  const filtered = allCountries.filter((country) =>
+    country.name.common.toLowerCase().includes(searchTerm)
+  );
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<p style="color:red;">No countries found matching "${searchTerm}".</p>`;
+  } else {
+    displayCountries(filtered);
+  }
+
+  // Clear search input if you want
+  // searchInput.value = "";
 }
 
-
-
-async function filterByRegion(region){
-try {
-    const response = await fetch(
-      `https://restcountries.com/v3.1/region/${region}`
-    );
-    if (!response.ok) {
-      throw new Error("No such Country Found");
-    }
-    const result = await response.json();
-    displayCountries(result);
-      searchInput.value = "";
-    selectedRegion.value = "select";
-  } catch (error) {
-    console.error("Search error:", error);
-    container.innerHTML = `<p style="color:red;">${error.message}</p>`;
+async function filterByRegion(region) {
+  if (region === "All Regions") {
+    displayCountries(allCountries);
+  } else {
+    const filtered = allCountries.filter((c) => c.region === region);
+    displayCountries(filtered);
   }
 }
 

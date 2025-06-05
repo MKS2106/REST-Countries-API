@@ -4,7 +4,7 @@ const container = document.getElementById("country");
 const searchInput = document.getElementById("country-search");
 
 const selectedRegion = document.getElementById("region-filter");
-container.innerHTML = "";
+// container.innerHTML = "";
 
 let allCountries = []; // array to hold all the countires from API response
 //Function to fetch data from API
@@ -29,17 +29,24 @@ function displayCountries(countries) {
   countries.forEach((country) => {
     const countryDiv = document.createElement("div");
     countryDiv.classList.add("country-item");
-    countryDiv.innerHTML = `<img style = "width:200px" src="${
+    countryDiv.innerHTML = `<img style = "width:100%; height:150px; object-fit:cover; border-radius:4px; margin-bottom:0.5rem;" src="${
       country.flags.svg
     }"/>
       <h3>${country.name.common || "Unknown Country"}</h3>
-      <p><strong>Capital:</strong> ${country.capital?.[0] || "N/A"}</p>
-      <p><strong>Population:</strong> ${
-        country.population?.toLocaleString() || "N/A"
-      }</p>
+            <p><strong>Population:</strong> ${
+              country.population?.toLocaleString() || "N/A"
+            }</p>
+          <p><strong>Region:</strong> ${country.region}</p>
+          <p><strong>Capital:</strong> ${country.capital?.[0] || "N/A"}</p>
 
       <hr>
     `;
+    countryDiv.addEventListener("click", () => {
+      // Save country data to localStorage (or sessionStorage)
+      localStorage.setItem("selectedCountry", JSON.stringify(country));
+      // Navigate to details page
+      window.location.href = "country-detail.html";
+    });
     container.appendChild(countryDiv);
   });
 }

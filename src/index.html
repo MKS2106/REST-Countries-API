@@ -8,25 +8,29 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>What's in the World</h1>
-    <section>
-            <input type="search" id="country-search" name="country-search" placeholder="Search for a country" />
-       </section>
-    <div id="region-container">
-               <select name="region" id="region-filter">
-        <!-- <option value="select">Select Region</option> -->
-        <option value ="All Regions">All-Regions</option>    
-        <option value ="Africa">Africa</option>
-        <option value ="Americas">Americas</option>
-        <option value ="Asia">Asia</option>
-        <option value ="Oceania">Oceania</option>
-        <option value ="Europe">Europe</option>
-        </select>
-
-        </div>
-    <div id="country-container">
-         <div id="country"></div>
+    <div id="header">
+      <h2>Where in the World</h2>
     </div>
-   
+    
+    <div id="region-container">
+        <input
+      type="search"
+      id="country-search"
+      name="country-search"
+      placeholder="Search for a country"
+    />
+      <select name="region" id="region-filter" aria-placeholder="Fileter by Region">
+        <!-- <option value="select">Select Region</option> -->
+        <option value="All Regions">Filter by Region</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">Americas</option>
+        <option value="Asia">Asia</option>
+        <option value="Oceania">Oceania</option>
+        <option value="Europe">Europe</option>
+      </select>
+    </div>
+    <!-- <div id="country-container"> -->
+      <div id="country"></div>
+    <!-- </div> -->
   </body>
 </html>

@@ -10,13 +10,15 @@ let allCountries = []; // array to hold all the countires from API response
 //Function to fetch data from API
 async function fetchCountries() {
   try {
-    const res = await fetch("https://restcountries.com/v3.1/all");
-    // console.log(res);
+    // const res = await fetch("https://restcountries.com/v3.1/all");
+    const res = await fetch("https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags,borders");
+    
+    console.log(res);
     if (!res.ok) {
       throw new Error(`API request failed with status ${res.status}`);
     }
     allCountries = await res.json();
-    // console.log(countries);
+    console.log(allCountries);
     displayCountries(allCountries);
   } catch (error) {
     console.error("Failed", error);

@@ -5,28 +5,24 @@
     <meta name="viewport" content="width='device-width', initial-scale=1.0" />
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>REST-Countries API</title>
   </head>
   <body>
-    <div id="header">
-      <h2>Where in the World</h2>
-    </div>
+    <nav id="header">
+      <h1>Where in the World ?</h1>
+    </nav>
     
-    <div id="region-container">
-        <input
-      type="search"
-      id="country-search"
-      name="country-search"
-      placeholder="Search for a country"
-    />
-      <select name="region" id="region-filter" aria-placeholder="Fileter by Region">
-        <!-- <option value="select">Select Region</option> -->
-        <option value="All Regions">Filter by Region</option>
+    <div id="region-container">    
+        <!-- Search input for filtering countries by name -->
+      <input type="search" id="country-search" name="country-search" placeholder=" &#128269 Search for a country"/>
+        <!-- Dropdown select to filter countries by region -->
+      <select name="region" id="region-filter" aria-placeholder="Filter by Region">
+        <option value="All Regions">Filter by Region</option> 
         <option value="Africa">Africa</option>
         <option value="Americas">Americas</option>
         <option value="Asia">Asia</option>
         <option value="Oceania">Oceania</option>
-        <option value="Europe">Europe</option>
+        <option value="Europe">Europe</option> 
       </select>
     </div>
     <!-- <div id="country-container"> -->

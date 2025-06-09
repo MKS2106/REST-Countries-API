@@ -7,18 +7,28 @@ body, html {
   justify-content: flex-start;
   padding: 20px;
 }
+#header{
+  display:inline-flex;
+  width:100%;
+  background-color: #ffff;
+}
+/* #content{
+  background-color: rgb(245, 247, 247);
+} */
 
-h1 {
+/* h1 { */
   /* Align title to left */
-  background-color: aqua;
+  /* background-color: aqua;
   text-align: left;
   margin-bottom: 10px;
-  width: 100%;
-}
+  width: 100%; */
+/* } */
 
 #back-button {
+  margin-top: 2px;
     background-color:#ffff;
   margin-bottom: 20px;
+  margin-left: 15px;
   padding: 10px;
   cursor: pointer;
   font-size: 15px;

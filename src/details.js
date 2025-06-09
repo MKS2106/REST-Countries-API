@@ -1,23 +1,24 @@
-// const { functionsIn } = require("lodash");
-
 const countryDetails = document.getElementById("country-detail");
 const countryImage = document.getElementById("image");
 const backButton = document.getElementById("back-button");
 
-// async functionsIn
+
+// Back button navigates back to the previous page
 backButton.addEventListener("click", () => {
   window.history.back();
 });
-
+// Function to display detailed information about a country
 function displayDetails(country) {
-  console.log("i am here");
   const nativeName =
     country.name.nativeName &&
     Object.values(country.name.nativeName)[0]?.common;
+   // List of border countries (country codes)  
   const borderCountries = country.borders || [];
-  console.log(borderCountries)
 
+  //Show Country Image
   countryImage.innerHTML = `<img src="${country.flags.svg}"/>`;
+
+  // Populate country details section with information
   countryDetails.innerHTML = `
     <h3>${country.name.common || "Unknown Country"}</h3>
     <div id="details-columns">
@@ -37,26 +38,30 @@ function displayDetails(country) {
         ${
           borderCountries.length > 0
             ? borderCountries
-                .map((border) => `<button class="border-btn" onclick="loadBordercountry('${border}')">${border}</button>`)
-                .join(" ")
+                .map((border) => `<button class="border-btn" data-code = "${border}">${border}</button>`)
+                .join(" ")// identify the border country based by creating code for each one
             : "<span>None</span>"
         }
       </div>
     `;
     
 }
+// Function to fetch details of a border country by its country code (alpha code)
 async function loadBordercountry(borderCountry){
   console.log("border country")
   try{
+      // Fetch country data using alpha code from REST Countries API
     const result = await fetch(`https://restcountries.com/v3.1/alpha/${borderCountry}`)
-  const respose = await result.json();
-  displayDetails(respose[0])
+  const response = await result.json(); // PArse the response from the API
+  // Display details of the fetched border country
+  displayDetails(response[0])
   }catch(error){
     console.error("Error loading Border country", error);
   }
   
 }
 
+// Function to initialize and load details of the selected country from localStorage
 function details() {
   const countryData = localStorage.getItem("selectedCountry");
   if (countryData) {
@@ -64,5 +69,13 @@ function details() {
     displayDetails(country);
   }
 }
-
+//Event handler to invoke laodCountry funtion upon clicking a border country to dispaly corresponding details
+document.addEventListener("click", function (e) {
+  const button = e.target.closest(".border-btn");
+  if (button && button.dataset.code) {
+    const code = button.dataset.code;
+    loadBordercountry(code);
+  }
+});
+//Invoke the details functions to load selected country data
 details();

@@ -1,36 +1,36 @@
-// const { constant } = require("lodash");
-
 const container = document.getElementById("country");
 const searchInput = document.getElementById("country-search");
-
 const selectedRegion = document.getElementById("region-filter");
-// container.innerHTML = "";
 
 let allCountries = []; // array to hold all the countires from API response
+
 //Function to fetch data from API
 async function fetchCountries() {
   try {
     // const res = await fetch("https://restcountries.com/v3.1/all");
-    const res = await fetch("https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags,borders");
-    
-    console.log(res);
-    if (!res.ok) {
+    //fetch all countries with specified fields
+    const res = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,capital,region,population,flags,borders"
+    );
+
+      if (!res.ok) {
       throw new Error(`API request failed with status ${res.status}`);
     }
-    allCountries = await res.json();
-    console.log(allCountries);
-    displayCountries(allCountries);
+    allCountries = await res.json(); //parse JSON data from response
+    displayCountries(allCountries); // Display all countries in the home page
   } catch (error) {
     console.error("Failed", error);
   }
 }
 
-//Function to display countries
+//Function to display countries on the page
 function displayCountries(countries) {
-  container.innerHTML = "";
+  container.innerHTML = ""; // Clear existing content
+  //Loop through each country to and create a card element
   countries.forEach((country) => {
-    const countryDiv = document.createElement("div");
+    const countryDiv = document.createElement("div"); // Create a div per country(each card)
     countryDiv.classList.add("country-item");
+    // Build inner HTML for country card, showing flag, name, population, region, and capital
     countryDiv.innerHTML = `<img style = "width:100%; height:150px; object-fit:cover; border-radius:4px; margin-bottom:0.5rem;" src="${
       country.flags.svg
     }"/>
@@ -43,6 +43,7 @@ function displayCountries(countries) {
 
       <hr>
     `;
+    // Add click event to save selected country in localStorage and navigate to detail page
     countryDiv.addEventListener("click", () => {
       // Save country data to localStorage (or sessionStorage)
       localStorage.setItem("selectedCountry", JSON.stringify(country));
@@ -53,18 +54,22 @@ function displayCountries(countries) {
   });
 }
 
+// Event listener for search input - triggers search as user types
 searchInput.addEventListener("input", () => {
   searchByCountry();
 });
 
+// Event listener for region filter dropdown change
 selectedRegion.addEventListener("change", function () {
   if (selectedRegion.value === "All Regions") {
     fetchCountries();
   } else filterByRegion(selectedRegion.value);
 });
 
+// Function to search countries by name based on search input value
 async function searchByCountry() {
   const searchTerm = searchInput.value.trim().toLowerCase();
+  // If search input is empty, reset region filter and show all countries
   if (!searchTerm) {
     selectedRegion.value = "All Regions";
     displayCountries(allCountries);
@@ -89,6 +94,7 @@ async function searchByCountry() {
   // searchInput.value = "";
 }
 
+// Function to filter countries by selected region
 async function filterByRegion(region) {
   if (region === "All Regions") {
     displayCountries(allCountries);
@@ -98,4 +104,5 @@ async function filterByRegion(region) {
   }
 }
 
+//Invoke fetchCountries function to display all countries on page load
 fetchCountries();

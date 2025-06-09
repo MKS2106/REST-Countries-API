@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Country-Details</title>
     <script src="details.js" defer></script>
-    <link rel="stylesheet" href="detail-style.css"/>
-</head>
-<body>
-    <h2>Where in the World</h2>
-    <button id="back-button">&#8592; Back</button>
-  <div id="country-container">
-    <div id="image">
+    <link rel="stylesheet" href="detail-style.css" />
+  </head>
+  <body>
+    <div id="header">
+      <h2>Where in the World ?</h2>
     </div>
-    <div id = "country-detail">
+    <div id="content">
+      <!-- Back button to navigate back to main page -->
+      <button id="back-button">&#8592; Back</button>
+      <!-- Container to display country details -->
+      <div id="country-container">
+        <!-- Div to hold the country flag/image -->
+        <div id="image"></div>
+
+        <!-- Div to hold text content of country details -->
+        <div id="country-detail"></div>
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

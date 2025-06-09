@@ -30,9 +30,9 @@ Your users should be able to:
 
 ## Screenshots
 ### Home-Page:
-![HomePage-ScreenShot](screenshots/Screenshot 2025-06-08 at 17-38-06 REST-Countries API.png)
+![HomePage-ScreenShot](screenshots/REST-Countries.png)
 ### Details-Page
-![CountryDetails-ScreenShot](screenshots/Screenshot 2025-06-08 at 17-38-21 Country-Details.png)
+![CountryDetails-ScreenShot](screenshots/Country-Details.pngCountry-Details.png)
 
 ### Built with
 

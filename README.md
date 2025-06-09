@@ -30,7 +30,8 @@ Your users should be able to:
 
 ### Screenshot
 
-![](\2025-RTT-23\mod-7\rest-countries-api-with-color-theme-switcher-master\screenshots\Screenshot 2025-06-08 at 17-38-06 REST-Countries API.png)
+![HomePage-ScreenShot](screenshots/Screenshot 2025-06-08 at 17-38-06 REST-Countries API.png)
+![CountryDetails-ScreenShot](screenshots/Screenshot 2025-06-08 at 17-38-21 Country-Details.png)
 
 ### Built with
 

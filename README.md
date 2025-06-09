@@ -57,8 +57,8 @@ Your users should be able to:
 ### Continued Development
 - Add Dark Mode toggle
 
-## Author
-- Website - [Manasa Madhihalli Swamy](https://www.your-site.com)
+## Author and Link to LiveDemo
+- Website - [Manasa Madhihalli Swamy](https://rest-countries-api-j9r3.vercel.app/)
 
 ## Acknowledgments
 - A big thank you to my peers for their valuable feedback,support throughout this project.

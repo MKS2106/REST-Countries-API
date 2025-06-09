@@ -28,9 +28,10 @@ Your users should be able to:
 - Click through to the border countries on the detail page
 - Toggle the color scheme between light and dark mode *(optional)*
 
-### Screenshot
-
+## Screenshots
+### Home-Page:
 ![HomePage-ScreenShot](screenshots/Screenshot 2025-06-08 at 17-38-06 REST-Countries API.png)
+### Details-Page
 ![CountryDetails-ScreenShot](screenshots/Screenshot 2025-06-08 at 17-38-21 Country-Details.png)
 
 ### Built with
